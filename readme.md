@@ -1,5 +1,3 @@
-NEETCODE GRIND TO LEAVE TW
-
 RULES:
 
     MONDAYS:       
@@ -14,6 +12,8 @@ RULES:
         SECOND HOUR:
             review/learn an important concept
             end on reading over new leetcode problem to leave off thinking about a solution
+
+spreadsheet of solved problems: https://docs.google.com/spreadsheets/d/1wc__XhQK4ksazoG-x2cshveYIzaOZDY7RSOFmiXRdUI/edit?usp=sharing
 
     
 

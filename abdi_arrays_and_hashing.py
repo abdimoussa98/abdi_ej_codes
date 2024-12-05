@@ -135,3 +135,113 @@ def bucketSortTopKFrequent(self, nums, k):
         #         res.append(num)
         #         if len(res) == k: MUCH CLEANER!!!!
         #             return res
+
+# https://leetcode.com/problems/product-of-array-except-self/
+# with division
+def productExceptSelf(self, nums):
+    """
+    :type nums: List[int]
+    :rtype: List[int]
+    """
+    num_zeros = 0
+    prod = 1
+    
+    for num in nums:
+        if num == 0:
+                num_zeros += 1
+        else: 
+            prod = prod * num
+    
+    if num_zeros > 1:
+        for idx in range(len(nums)):
+            nums[idx] = 0
+        return nums
+
+    for idx, num in enumerate(nums):
+        if num != 0 and num_zeros != 1:
+                nums[idx] = prod // num
+        elif num == 0: 
+            nums[idx] = prod
+        else: 
+            nums[idx] = 0
+    
+    return nums
+
+# with fromLeftRunningProduct and fromRightRunningProduct (Prefix & Suffix (Optimal))
+def productExceptSelf(self, nums):
+    """
+    :type nums: List[int]
+    :rtype: List[int]
+    """
+    # result = [0 for i in range(len(nums))]
+    result = [0] * (len(nums))
+
+    leftProd = 1
+    for idx in range(len(nums)):
+        result[idx] = leftProd
+        leftProd *= nums[idx]
+    
+    rightProd = 1
+    for idx in range(len(nums) - 1, -1, -1):
+        result[idx] *= rightProd
+        rightProd *= nums[idx] 
+    return result
+
+# https://leetcode.com/problems/valid-sudoku/
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        
+        for row in board:
+            prev = set()
+            for el in row:
+                if el != '.':
+                    if el in prev:
+                        return False
+                    else:
+                        prev.add(el)
+
+        for c in range(9): # first loop will always increment after the completion of the second loop
+            prev = set()
+            for r in range(9):
+                if board[r][c] != '.':
+                    if board[r][c] in prev:
+                        return False
+                    else:
+                        prev.add(board[r][c])
+
+        for y_inc in range(0, 9, 3):
+            for x_inc in range(0, 9, 3):
+                if not self.subBox((0+x_inc, 3+x_inc), (0+y_inc, 3+y_inc), board):
+                    return False
+
+        return True
+    
+    def subBox(self, x_points, y_points, board):
+        prev = set()
+        for c in range(y_points[0],y_points[1]):
+            for r in range(x_points[0],x_points[1]):
+                if board[c][r] != '.':
+                    if board[c][r] in prev:
+                        return False
+                    else:
+                        prev.add(board[c][r])
+        return True
+            
+    # x(0-2)    x(3-5)      x(6-8)
+    # y(0-2)    y(0-2)      y(0-2)
+    # [000]     [000]       [000]
+    # [000]     [000]       [000]
+    # [000]     [000]       [000]
+
+    # x(0-2)    x(3-5)      x(6-8)
+    # y(3-5)    y(3-5)      y(3-5)
+    # [000]     [000]       [000]
+    # [000]     [000]       [000]
+    # [000]     [000]       [000]
+
+    # x(0-2)    x(3-5)      x(6-8)
+    # y(6-8)    y(6-8)      y(6-8)
+    # [000]     [000]       [000]
+    # [000]     [000]       [000]
+    # [000]     [000]       [000]
+

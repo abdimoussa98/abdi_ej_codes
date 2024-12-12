@@ -16,7 +16,7 @@
 #     -> 2
 #         -> 1
 # 
-# [4,2,7,1,3,6,9,1,2,3,4,5,6,7,8]
+# [4,2,7,1,3,6,9]
 # 
 #         -> 9
 #     -> 7
@@ -70,8 +70,15 @@ def dfs_with_loop(root):
     #TODO
 
 def bfs(root):
-    pass
-    #TODO
+    nodes = [root]
+    while nodes:
+      foo = []
+      for node in nodes:
+        if node:
+          print(node.val)
+          foo.append(node.left)
+          foo.append(node.right)
+      nodes = foo
 
 def main():
 
@@ -84,6 +91,17 @@ def main():
 #            -> 1
 #                   -> None
 
-  dfs(array_to_binary_tree([2,1,3]))
+  # dfs(array_to_binary_tree([2,1,3]))
+
+# [4,2,7,1,3,6,9]
+# 
+#         -> 9
+#     -> 7
+#         -> 6
+# -> 4
+#         -> 3
+#     -> 2
+#         -> 1
+  bfs(array_to_binary_tree([4,2,7,1,3,6,9]))
 
 main()
